@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+
 
 
 @Component({
@@ -10,7 +10,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 })
 export class AppComponent {
  
-  faCoffee = faCoffee;
+ 
   submitted=false;
   contactForm = this.fb.group({
     contacts: this.fb.array([this.createContact()])
