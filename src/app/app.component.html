@@ -6,5 +6,43 @@
 <!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<fa-icon [icon]="faCoffee"></fa-icon>
-<h1>hi</h1>
+<nav>
+    <a class="navbar-brand"></a>
+</nav>
+   
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <h2>Contacts</h2>
+
+    
+    <button (click)="addContacts()" class="btn btn-primary" >+ Add contact</button>
+    
+    <div formArrayName="contacts" *ngFor="let t of contacts.controls; let i = index" [formGroupName]="i">
+    
+      <h2>Contacts {{i + 1}}</h2>
+    
+     <!-- <div [formGroup]="t"> --> 
+         
+          <button (click)="deleteContact(i)" class="btn btn-primary" *ngIf="contacts.length>1">- Delete Contact</button>
+        
+        <div>
+        <label for="{{'firstName'+i}}">First Name:* </label>
+         <input formControlName='firstName'  id="{{'firstName'+i}}" type="text" />
+        <span *ngIf="t.get('firstName').errors.required">Required</span>
+        </div>
+     <div>
+       <label for="{{'lastName'+i}}">Last Name: </label>
+       <input formControlName='lastName' id="{{'lastName'+i}}" type="text" />
+    </div>
+    <div>
+        <label for="{{'email'+i}}">Email:* </label>
+        <input formControlName='email' id="{{'email'+i}}" type="text" />
+    </div>
+    <div>
+        <label for="{{'phone'+i}}">Phone: </label>
+        <input formControlName='phone' id="{{'phone'+i}}" type="text" />
+        </div>
+    </div>
+    <p>
+      <button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid">Submit</button>
+    </p>
+  </form>
